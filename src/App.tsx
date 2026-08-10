@@ -12,6 +12,7 @@ import { TypeGeneratorModal } from "./components/TypeGeneratorModal";
 import { BatchConverterModal } from "./components/BatchConverterModal";
 import { JwtDecoderModal } from "./components/JwtDecoderModal";
 import { AndroidAppModal } from "./components/AndroidAppModal";
+import { WelcomeSplash } from "./components/WelcomeSplash";
 import { exportToPostmanCollection } from "./utils/postmanExporter";
 import {
   PythonTarget,
@@ -294,6 +295,7 @@ export default function App() {
       <div className="absolute bottom-1/4 -right-10 w-96 h-96 bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none"></div>
 
       {/* Top Header */}
+      <WelcomeSplash />
       <Header
         onOpenHistory={() => setIsHistoryOpen(true)}
         onOpenPresets={() => setIsPresetsOpen(true)}
