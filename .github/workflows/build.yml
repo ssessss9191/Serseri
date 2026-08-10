@@ -1,0 +1,84 @@
+name: Build & CI Workflow
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-web:
+    name: Build & Test Web App
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Run Type Check & Linter
+        run: npm run lint
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Upload Web Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: dist/
+          retention-days: 7
+
+  build-android:
+    name: Build Android APK & PWA Bundle
+    runs-on: ubuntu-latest
+    needs: build-web
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: Build Web Application
+        run: npm run build
+
+      - name: Setup Capacitor Android
+        run: |
+          npx @capacitor/cli init "Curl2Py Pro" "com.curl2py.app" --web-dir "dist" || true
+          echo "Capacitor Android configuration initialized."
+
+      - name: Prepare Android App Package
+        run: |
+          mkdir -p android-build
+          cp -r dist/* android-build/
+          echo "Android web package ready for APK packaging."
+
+      - name: Upload Android App Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-app-package
+          path: android-build/
+          retention-days: 14

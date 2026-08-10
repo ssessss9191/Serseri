@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { History, Sparkles, Moon, Sun, Code2, Layers, Key, FileCode, Download, ChevronDown } from "lucide-react";
+import { History, Sparkles, Moon, Sun, Code2, Layers, Key, FileCode, Download, ChevronDown, Smartphone } from "lucide-react";
 
 interface HeaderProps {
   onOpenHistory: () => void;
@@ -7,6 +7,7 @@ interface HeaderProps {
   onOpenBatch: () => void;
   onOpenTypeGen: () => void;
   onOpenJwt: () => void;
+  onOpenAndroid: () => void;
   onExportPostman: () => void;
   darkMode: boolean;
   setDarkMode: (val: boolean) => void;
@@ -19,6 +20,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenBatch,
   onOpenTypeGen,
   onOpenJwt,
+  onOpenAndroid,
   onExportPostman,
   darkMode,
   setDarkMode,
@@ -53,6 +55,16 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Action Controls */}
         <div className="flex items-center gap-2">
+          {/* Android App Download Button */}
+          <button
+            onClick={onOpenAndroid}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold rounded-xl text-slate-950 bg-emerald-400 hover:bg-emerald-300 transition-all active:scale-95 shadow-md shadow-emerald-500/20"
+            title="Android & Mobil İndir"
+          >
+            <Smartphone className="w-3.5 h-3.5 text-slate-950" />
+            <span className="hidden sm:inline">Android App</span>
+          </button>
+
           {/* Tools Menu */}
           <div className="relative">
             <button
@@ -100,6 +112,17 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   <Key className="w-4 h-4 text-cyan-400" />
                   <span>JWT & Token Çözücü</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    onOpenAndroid();
+                    setToolsOpen(false);
+                  }}
+                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:bg-slate-800 hover:text-emerald-400 transition-colors"
+                >
+                  <Smartphone className="w-4 h-4 text-emerald-400" />
+                  <span>Android Uygulama (APK)</span>
                 </button>
 
                 <div className="border-t border-slate-800 my-1" />

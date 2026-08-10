@@ -1,0 +1,29 @@
+{
+  "short_name": "Curl2Py Pro",
+  "name": "Curl2Py Pro - cURL & Python Dönüştürücü",
+  "description": "Mobil ve Android uyumlu cURL - Python dönüştürücü, canlı API test aracı ve .py indirme uygulaması.",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "display": "standalone",
+  "orientation": "portrait",
+  "categories": ["developer", "utilities", "tools"],
+  "shortcuts": [
+    {
+      "name": "Toplu Dönüştürücü",
+      "url": "/?tool=batch"
+    },
+    {
+      "name": "Pydantic Model Üret",
+      "url": "/?tool=typegen"
+    }
+  ]
+}

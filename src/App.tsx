@@ -11,6 +11,7 @@ import { AiAnalysisModal } from "./components/AiAnalysisModal";
 import { TypeGeneratorModal } from "./components/TypeGeneratorModal";
 import { BatchConverterModal } from "./components/BatchConverterModal";
 import { JwtDecoderModal } from "./components/JwtDecoderModal";
+import { AndroidAppModal } from "./components/AndroidAppModal";
 import { exportToPostmanCollection } from "./utils/postmanExporter";
 import {
   PythonTarget,
@@ -57,6 +58,7 @@ export default function App() {
   const [isTypeGenOpen, setIsTypeGenOpen] = useState<boolean>(false);
   const [isBatchOpen, setIsBatchOpen] = useState<boolean>(false);
   const [isJwtOpen, setIsJwtOpen] = useState<boolean>(false);
+  const [isAndroidOpen, setIsAndroidOpen] = useState<boolean>(false);
 
   // Live test state
   const [isTestModalOpen, setIsTestModalOpen] = useState<boolean>(false);
@@ -298,6 +300,7 @@ export default function App() {
         onOpenBatch={() => setIsBatchOpen(true)}
         onOpenTypeGen={() => setIsTypeGenOpen(true)}
         onOpenJwt={() => setIsJwtOpen(true)}
+        onOpenAndroid={() => setIsAndroidOpen(true)}
         onExportPostman={handleExportPostman}
         darkMode={darkMode}
         setDarkMode={setDarkMode}
@@ -380,6 +383,11 @@ export default function App() {
         isOpen={isJwtOpen}
         onClose={() => setIsJwtOpen(false)}
         curlCommand={curlCommand}
+      />
+
+      <AndroidAppModal
+        isOpen={isAndroidOpen}
+        onClose={() => setIsAndroidOpen(false)}
       />
 
       {/* Floating Toast Notification */}
