@@ -39,7 +39,7 @@ jobs:
           retention-days: 7
 
   build-android:
-    name: Build Android APK & PWA Bundle
+    name: Build Android APK (Debug)
     runs-on: ubuntu-latest
     needs: build-web
 
@@ -65,25 +65,22 @@ jobs:
       - name: Build Web Application
         run: npm run build
 
-      - name: Setup Capacitor Android Project
+      - name: Capacitor Sync Android
         run: |
-          npx @capacitor/cli init "Curl2Py Pro" "com.curl2py.app" --web-dir "dist" || true
-          npx @capacitor/cli add android || true
-          npx @capacitor/cli copy android || true
+          npx cap init "Curl2Py Pro" "com.curl2py.app" --web-dir "dist" || true
+          npx cap add android || true
+          npx cap sync android
 
-      - name: Prepare Android App Package
+      - name: Build Android Debug APK
         run: |
-          mkdir -p android-build
-          cp -r dist/* android-build/
-          if [ -d "android" ]; then
-            cp -r android android-build/
-          fi
-          echo "Android package created successfully."
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
 
-      - name: Upload Android App Artifacts
+      - name: Upload Android APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: android-app-package
-          path: android-build/
-          retention-days: 14
+          name: Curl2Py-Pro-Debug-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
 

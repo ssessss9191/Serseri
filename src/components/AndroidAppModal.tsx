@@ -236,14 +236,17 @@ echo "cd android && ./gradlew assembleDebug"
                 </a>
               </div>
 
-              <div className="text-xs text-slate-400 space-y-1.5 bg-slate-950/60 p-3 rounded-xl border border-slate-800">
-                <p className="font-semibold text-slate-300 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                  GitHub Actions Otomatik APK Derleyici:
+              <div className="text-xs text-slate-400 space-y-2 bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+                <p className="font-semibold text-slate-200 flex items-center gap-1.5 text-sm">
+                  <Sparkles className="w-4 h-4 text-emerald-400" />
+                  GitHub Actions ile APK İndirme Adımları:
                 </p>
-                <p>
-                  Proje kökündeki <code className="bg-slate-900 text-emerald-400 px-1 py-0.5 rounded">.github/workflows/build.yml</code> dosyası sayesinde her commit attığınızda Android APK paketi otomatik oluşturulur.
-                </p>
+                <ol className="list-decimal pl-4 space-y-1.5 text-slate-300">
+                  <li>Kodlarınızı GitHub reponuza <code className="text-emerald-400 bg-slate-900 px-1 py-0.5 rounded">git push</code> edin.</li>
+                  <li>GitHub'da <strong>Actions</strong> sekmesine tıklayın.</li>
+                  <li><strong>"Build & CI Workflow"</strong> iş akışının tamamlanmasını bekleyin.</li>
+                  <li>Sayfanın altındaki <strong>"Artifacts"</strong> bölümünden <code className="text-emerald-400 bg-slate-900 px-1 py-0.5 rounded">Curl2Py-Pro-Debug-APK</code> dosyasını indirip doğrudan Android telefonunuza kurun!</li>
+                </ol>
               </div>
             </div>
           )}
